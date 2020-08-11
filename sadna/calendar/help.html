@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>oCalendar Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .title{
+            font-weight:bold;
+            margin-top: 15px;
+            margin-bottom:15px;
+        }
+        .code{
+            border: 1px solid #cccccc;
+            padding:10px;
+            font-size:13px;
+            font-family:'Consolas','Bitstream Vera Sans Mono','Courier New',Courier,monospace !important;
+        }
+		.image{
+			width:50%;
+			margin:0px auto;
+		}
+    </style>
+  </head>
+  <body style="background-color: #cccccc;font-family: verdana; font-size: 14px;">
+      <div style="width:80%; margin:0px auto; background-color: #EDEDED;">
+          <div style=" background-color: #9F0000;color: white;;font-size: 26px;padding: 15px 50px; font-weight:bold;">
+              oCalendar Documentation
+          </div>
+          <div style="padding:15px;">
+              <div style="font-weight:bold;">What is oCalendar?</div>
+              <p>oCalendar is a jQuery plugin that allows you to add an event calendar to your sites or projects easily. oCalendar has a database support and uses json to communicate with the server. You can add, edit and delete events from the client side.</p>
+              <div style="font-weight:bold; margin-top: 15px; margin-bottom:15px;">Features</div>
+              <ul style="margin-top:15px;">
+                  <li>easy to integrate</li>
+                  <li>resizable</li>
+                  <li>search events</li>
+                  <li>10 different themes</li>
+                  <li>easy to change language</li>
+                  <li>add, edit and delete events from client side</li>
+                  <li>add, edit and delete operation constraint</li>
+                  <li>db support using json</li>
+              </ul>
+              <div class="title">Requirement</div>
+              <p>The plugin requires jQuery 1.5.1</p>
+              <div class="title">Installation</div>
+              <p>First you should copy js,css and images folders and paste them to your sites root path. Then link the en.js(language file) and oCalendar.js javascript file and the blue.css(any theme file you want) style sheet file from within the head of your HTML document. Be sure to link oCalendar.js after jQuery.js in the order they appear. Note remember to adjust the src to reflect the location of the javascripts on your website.</p>
+              <div class="code">
+                    &lt;head&gt;<br/>
+                            <dd>...<br/></dd>
+                            <dd>&lt;script type="text/javascript" src="js/jquery1.5.1.js"&gt;&lt;/script&gt;</dd><br/>
+                            <dd>&lt;script type="text/javascript" src="js/en.js"&gt;&lt;/script&gt;</dd><br/>
+                            <dd>&lt;script type="text/javascript" src="js/oCalendar.js"&gt;&lt;/script&gt;</dd><br/>
+                            <dd>&lt;link rel="stylesheet" type="text/css" href="css/blue.css"/&gt;</dd><br/>
+                    &lt;/head&gt;
+              </div>
+
+            <div class="title">Usage</div>
+            <p>Create a div in your html and give an identifier. For example;</p>
+            <div class="code">
+                &lt;div id="calendar"&gt;&lt;/div&gt;
+            </div>
+            <p>Then execute the following script;</p>
+            <div class="code">
+                $("#calendar").oCalendar();
+            </div>
+            <div class="title">Define size</div>
+            <p>
+                You may define the width and height of the calendar if you want. If you don't provide the width and height, by default the calendar will be maximized. I suggest do not give a width value smaller than 650px, however if you really need narrower callendar I suggest you to set the "useAbbr" setting to true. So abbreviation of the month, week and day names are used and positioning will be accurate. Minimum width I suggest, is 450px if you set the useAbbr option to true.
+            </p>
+            <div class="code">
+                $("#calendar").oCalendar({</br>
+                    <dd>width: 500,</dd></br>
+                    <dd>height:650,</dd></br>
+                    <dd>useAbbr:true</dd></br>
+                });
+            </div>
+            <div class="title">Changing Themes</div>
+            <p>oCalendar supports 10 different themes by default and you can change between them easily by linking the desired themes css from the header. You will find the theme-css files under the css folder. You may also create your own themes by changing the css files if you have css knowledge. Note that you should link only one theme in your header part.</p>
+
+            <div class="title">Changing the start day</div>
+            <p>Start day of the week is differs from part to part all around the world. By default Monday is the start day of the week in oCalendar. In order to change it you may define by the option "startDay". 0 is for the Monday and  1 is for the Sunday</p>
+            <div class="code">
+                $("#calendar").oCalendar({</br>
+                    <dd>width: 900,</dd></br>
+                    <dd>height:650,</dd></br>
+                    <dd>startDay:1 //0 for the Monday (default)</dd></br>
+                });
+            </div>
+            <div class="title">Connecting with your data provider.</div>
+            <p>oCalendar has a <strong>url</strong> option that should points the location of the file that you are going to use for your database operations.</p>
+            <div class="code">
+                $("#calendar").oCalendar({</br>
+                    <dd>width: 900,</dd></br>
+                    <dd>height:650,</dd></br>
+                    <dd>startDay:1, //0 for the Monday (default)</dd></br>
+                    <dd>url:"remote.php"</dd></br>
+                });
+            </div>
+            <div class="title">Constraint add, update, delete operations</div>
+            <p>In your applications or projects you may need to prevent the clients to add, delete and update events. For such a case, oCalendar suggests a setting called <strong>allowCud</strong> which offers the clients only the load operation when set to <em>"false"</em>. The default value of the setting is <em>"true"</em>, so if you want to prevent users, you should set it to <em>"false"</em>.
+            <div class="code">
+                $("#calendar").oCalendar({</br>
+                    <dd>width: 900,</dd></br>
+                    <dd>height:650,</dd></br>
+                    <dd>startDay:1, //0 for the Monday (default)</dd></br>
+                    <dd>allowCud: false, //default is true</dd></br>
+                    <dd>url:"remote.php"</dd></br>
+                });
+            </div>
+            <div class="title">DATABASE OPERATIONS</div>
+            <p>Before diving into this subject there are some things you should know about oCalendar.</p>
+            <p>First of all, oCalendar sends a parameter to the server called <strong>function</strong> that informs the server about the operation that is being done. For example for adding an event function parameter is set to "add". </p>
+            <p>Secondly, month values start from 1 in oCalendar. This means January is 1 <strong>not 0</strong>. So, always keep in mind this when dealing with the date parameters you are receiving from request at the backend (php, jsp ...).</p>
+            <p>More over, the format of the date parameter that is posted to server is <strong>dd-mm-yyyy</strong>. This is also same when loading the events from the server. I will give examples for all operations which includes the parameters sent and the json received.</p>
+            <p>And finally, time is not sent or received to/from server in the date parameter. oCalendar sends an other parameter for the time value (also json object has seperate attribute for it) represented in 24-hour format such as <strong>21:45</strong>.</p>
+            <p>Before you start be sure that, you have set the <strong>url</strong> setting to a file located in your server.</p>
+
+            <div class="title">Adding Operation</div>
+            <p>Here is an example for the parameter list for the add operation and returned json.</p>
+            <div class="code">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td style="width:100px; font-weight: bold;">ack</td><td>Meet with the parents</td>
+                        </tr><tr>
+                        <td style="width:100px; font-weight: bold;">date</td><td>13-1-2011</td>
+                        </tr><tr>
+                        <td style="width:100px; font-weight: bold;">function</td><td>add</td>
+                        </tr><tr>
+                        <td style="width:100px; font-weight: bold;">time</td><td>14:00</td>
+                    </tr>
+                </table>
+            </div>
+            <p>These parameters indicate that you are <strong>adding</strong> an event at <strong>13th of January, 2011</strong> at <strong>02:00 pm</strong>. And your description is <strong>"Meet with the parents"</strong>.</p>
+            <p>Server should return the operation result to oCalendar. For a successful operation;</p>
+            <div class="code">
+                {"success":true}
+            </div>
+            <p>and for an unsuccessful operation;</p>
+            <div class="code">
+                {"success":false}
+            </div>
+            <p>This returned parameter is important, because oCalendar requests a load operation if it's true.</p>
+            <div class="title">Loading Operation</div>
+              <p>Here is an example for the parameter list for the load operation and returned json.</p>
+              <div class="code">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td style="width:100px; font-weight: bold;">start</td><td>9-5-2011 00:00</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">end</td><td>28-3-2011 00:00</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">function</td><td>load</td>
+                        </tr>
+                    </table>
+              </div>
+              <p>In the backend you should send the events between 28th March and 9th May. This is the visible days in the oCalendar for April. If you change the view of the oCalendar to week or day these interval will be changed. Here is an example of returned json;</p>
+              <div class="code">
+                    [<br/>
+                        <dd>{</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "4",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ack": "Meet with the parents",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"time": "14:00",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"date": "07-04-2011"</dd><br/>
+                        <dd>},</dd><br/>
+                        <dd>{</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "5",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ack": "Do something :)",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"time": "20:00",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"date": "13-04-2011"</dd><br/>
+                        <dd>}</dd><br/>
+                    ]
+              </div>
+              <div>As you can see there are two events at this time interval. This is an example json you need to prepare at the backend and serve.</div>
+              <div class="title">Updating Operation</div>
+              <p>Here is an example for the parameter list for the update operation and returned json.</p>
+              <div class="code">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td style="width:100px; font-weight: bold;">ack</td><td>Meet with the parents and buy them a present.</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">date</td><td>13-1-2011</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">function</td><td>edit</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">id</td><td>4</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">time</td><td>14:00</td>
+                        </tr>
+                    </table>
+              </div>
+              <p>As you can see this parameters are nearly same with the add operation except for the <strong>function</strong> value (it's <strong>edit</strong> for update operations)and we have one more parameter <strong>id</strong> which hold the id of the record that is to be updated. All other parameter values are the newly edited values of the event.</p>
+              <p>Like the adding operation server should return the result of the edit such as <strong>{"success":true}</strong> or <strong>{"success":false}</strong> in order oCalendar to reload the calendar.</p>
+              <div class="title">Deleting Operation</div>
+              <p>Here is an example for the parameter list for the delete operation and returned json.</p>
+              <div class="code">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td style="width:100px; font-weight: bold;">function</td><td>delete</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">id</td><td>4</td>
+                        </tr>
+                    </table>
+              </div>
+              <p>oCalendar sends the <strong>id</strong> of the record that is to be deleted and the <strong>function</strong> as "delete" to the server. What you need to do is the delete the record with this id.</p>
+              <p>Again for the reload, send the result of the delete operation from the server.</p>
+              <div class="title">Searching Operation</div>
+              <p>Here is an example for the parameter list for the search operation and returned json.</p>
+              <div class="code">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td style="width:100px; font-weight: bold;">function</td><td>search</td>
+                            </tr><tr>
+                            <td style="width:100px; font-weight: bold;">str</td><td>Meet</td>
+                        </tr>
+                    </table>
+              </div>
+              <p>Parameter <strong>str</strong> sent by the oCalendar is the string value you want to search from the event descriptions. Note that <strong>function</strong> parameter is "search" in this case.</p>
+              <p>Returned json should be the same with the one sent after the load operation.</p>
+              <div class="code">
+                    [<br/>
+                        <dd>{</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "4",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ack": "Meet with the parents",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"time": "14:00",</dd><br/>
+                            <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"date": "07-04-2011"</dd><br/>
+                        <dd>}</dd><br/>
+                    ]
+              </div>
+      </div>
+  </body>
+</html>
+

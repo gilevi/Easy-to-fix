@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="demoFiles/js/jquery1.5.1.js"></script>
+    <script type="text/javascript" src="demoFiles/js/en.js"></script>
+    <script type="text/javascript" src="demoFiles/js/oCalendar.js"></script>
+    <link id="themeCss" rel="stylesheet" type="text/css" href="demoFiles/css/blue.css"/>
+
+    <script>
+        $(document).ready(function(){
+            $("#theme").change(function(){
+                changeTheme();
+            });
+
+            $("#calendar").oCalendar({
+                height:630,
+                url:'remote.php'
+            });
+        });
+
+        function loadCss(filename){
+            $("#themeCss").attr("href", filename);
+        }
+
+        function changeTheme(){
+            var val = $("#theme").val();
+            loadCss(val);
+        }
+    </script>
+  </head>
+        <body>
+            <div style="margin-bottom:10px;">
+                <span style="font-family: verdana">Theme</span>
+                <span>
+                    <select id="theme">
+                        <option value="css/blue.css">Blue</option>
+                        <option value="css/blueBlack.css">Blue-Black</option>
+                        <option value="css/darkBlue.css">Dark Blue</option>
+                        <option value="css/gray.css">Gray</option>
+                        <option value="css/greenBlack.css">Green-Black</option>
+                        <option value="css/lemonLime.css">Lemon Lime</option>
+                        <option value="css/lightBlue.css">Light Blue</option>
+                        <option value="css/limeGreen.css">Lime Green</option>
+                        <option value="css/pinkCandy.css">Pink Candy</option>
+                        <option value="css/violet.css">Violet</option>
+                    </select>
+                </span>
+            </div>
+            <div id="calendar"></div>
+        </body>
+</html>
